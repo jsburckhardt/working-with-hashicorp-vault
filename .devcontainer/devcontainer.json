@@ -1,0 +1,73 @@
+{
+	"name": "vault",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"VARIANT": "jammy"
+		}
+	},
+	
+	"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined",
+	"--network=host" ],
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": {
+				"files.insertFinalNewline": true,
+				"terminal.integrated.profiles.linux": {
+					"zsh": {
+						"path": "/usr/bin/zsh"
+					}
+				},
+				"terminal.integrated.defaultProfile.linux": "zsh",
+			},
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"IBM.output-colorizer",
+				"oderwat.indent-rainbow",
+				"davidanson.vscode-markdownlint",
+				"eamodio.gitlens",
+				"eriklynd.json-tools",
+				"golang.go",
+				"ms-vscode.go",
+				"searking.preview-vscode",
+				"adamhartford.vscode-base64",
+				"shardulm94.trailing-spaces",
+				"saekiraku.pin-up",
+				"timonwong.shellcheck",
+				"pomdtr.excalidraw-editor",
+				"ms-vscode.powershell"
+			]
+		}
+	},
+	"remoteEnv": {
+        "HOST_PROJECT_PATH": "${localWorkspaceFolder}"
+    },
+	"features": {
+		"ghcr.io/devcontainers/features/azure-cli:1": {},
+		"ghcr.io/devcontainers/features/docker-from-docker:1": {},
+		"ghcr.io/devcontainers/features/terraform:1": {},
+		"ghcr.io/rchaganti/vsc-devcontainer-features/azurebicep:1": {},
+		"powershell": "latest"
+	},
+	"mounts": [
+        "source=${env:HOME}${env:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,readonly",
+        "source=vault-zshhistory,target=/commandhistory,type=volume"
+    ]
+
+	// Features to add to the dev container. More info: https://containers.dev/implementors/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
