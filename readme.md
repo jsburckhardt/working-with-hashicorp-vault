@@ -1,5 +1,7 @@
 # configure
 
+A small repo that containes scripts for running a Hashicorp vault in a Windows machine.
+
 ## steps
 
 1. install binary
